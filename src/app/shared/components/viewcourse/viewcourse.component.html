@@ -1,0 +1,54 @@
+
+
+<div class="course">
+    <div class="row">
+        <div class="col-12">
+            <ng-container *ngIf="(viewcourse$ | async) as course; else nocourse">
+                <h2 class="font-weight-bold">
+                    {{course.description | uppercase}}
+                </h2>
+
+                <img [src]="course.iconUrl" [alt]="course.description" [title]="course.description">
+            </ng-container>
+        </div>
+
+        <div class="col-12 my-4">
+            <form [formGroup]="courseform">
+                <mat-form-field class="w-100">
+                    <input type="text" formControlName="lesson" matInput placeholder="Search Lesson..."
+                    >
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div class="col">
+            <ng-container *ngIf="(lesson$ | async) as lessons">
+                <table class="table table bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                All Lessons
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let lesson of lessons">
+                            <td>{{lesson.seqNo}}</td>
+                            <td>{{lesson.description}}</td>
+                            <td>{{lesson.duration}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </ng-container>
+        </div>
+    </div>
+
+    <ng-template #nocourse>
+        <p class="alert alert-info">
+            No Course Available
+        </p>
+    </ng-template>
+</div>

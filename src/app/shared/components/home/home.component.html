@@ -1,0 +1,19 @@
+
+<div class="courses">
+    <h3 class="font-weight-bold">
+        All Courses
+    </h3>
+
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Beginners">
+            <app-coursecard *ngFor="let course of beginnercoursearr" [getcourse]="course">
+
+            </app-coursecard>
+        </mat-tab>
+        <mat-tab label="Advanced">
+            <app-coursecard *ngFor="let course of advancecoursearr" [getcourse]="course">
+
+            </app-coursecard>
+        </mat-tab>
+    </mat-tab-group>
+</div>
