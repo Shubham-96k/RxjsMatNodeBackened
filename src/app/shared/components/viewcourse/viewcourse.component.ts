@@ -15,6 +15,8 @@ export class ViewcourseComponent implements OnInit {
   viewcourse$ !: Observable<Icourse>;
   courseform !: FormGroup;
   lesson$ !: Observable<Ilesson[]>;
+  orgarr !: Array<Ilesson>;
+  lessons !: Array<Ilesson>;
 
   constructor(
     private _routes : ActivatedRoute,
@@ -30,15 +32,36 @@ export class ViewcourseComponent implements OnInit {
       lesson : new FormControl(null , Validators.required)
     })
 
-    this.lesson$ = this._coursesvc.getlesson(this.courseId)
-    this.lesson$ = this.courseform.get('lesson')
-    ?.valueChanges
-    .pipe(
-      startWith(''),
-      debounceTime(1500),
-      distinctUntilChanged(),
-      switchMap(val => this._coursesvc.getlesson(this.courseId, 10, val))
-    )!
+    // this.lesson$ = this._coursesvc.getlesson(this.courseId)
+
+    this._coursesvc.getlesson(this.courseId)
+    .subscribe(res => {
+      this.orgarr = res
+      this.lessons = res
+    })
+
+    //  this.courseform.get('lesson')
+    // ?.valueChanges
+    // .pipe(
+    //   startWith(''),
+    //   debounceTime(1500),
+    //   distinctUntilChanged(),
+    //   // switchMap(val => this._coursesvc.getlesson(this.courseId, 10, val))
+    //   switchMap(val => {
+    //    return this.lessons = this.lessons.filter(ele => ele.description.includes(val));
+    //   })
+    // )!
+
+
+    this.courseform.get('lesson')
+    ?.valueChanges.subscribe(res => {
+      if(res){
+        
+      this.lessons = this.lessons.filter(ele => ele.description.toLowerCase().includes(res.toLowerCase().trim()))
+      }else{
+        this.lessons = this.orgarr
+      }
+    })
   }
 
  

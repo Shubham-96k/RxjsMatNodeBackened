@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl : 'http://localhost:9000/api'
+  baseUrl : 'https://courses-6a6f1-default-rtdb.asia-southeast1.firebasedatabase.app/'
 };

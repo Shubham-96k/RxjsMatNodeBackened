@@ -44,7 +44,7 @@ export class CourseformComponent implements OnInit {
 
   onSave(){
     if(this.courseform.valid){
-      let updtdobj = {...this.courseform.value, id : this.coursedata.id}
+      let updtdobj = {...this.courseform.value, id : this.coursedata.id, iconUrl : this.coursedata.iconUrl}
 
       
       this._coursesvc.updatecourse(updtdobj)

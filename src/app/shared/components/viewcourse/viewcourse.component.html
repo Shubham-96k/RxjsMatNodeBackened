@@ -22,7 +22,7 @@
         </div>
 
         <div class="col">
-            <ng-container *ngIf="(lesson$ | async) as lessons">
+            <ng-container *ngIf="lessons">
                 <table class="table table bordered">
                     <thead>
                         <tr>
@@ -34,8 +34,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let lesson of lessons">
-                            <td>{{lesson.seqNo}}</td>
+                        <tr *ngFor="let lesson of lessons; let i = index">
+                            <td>{{i + 1}}</td>
                             <td>{{lesson.description}}</td>
                             <td>{{lesson.duration}}</td>
                         </tr>
